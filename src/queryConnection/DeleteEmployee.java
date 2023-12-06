@@ -59,12 +59,12 @@ class DeleteEmployee extends JFrame {
 
                 try (ResultSet resultSet = preparedStatement.executeQuery()) {
                     if (resultSet.next()) {
-                        // Employee found
+                     
                         String firstName = resultSet.getString("first_name");
                         String lastName = resultSet.getString("last_name");
                         resultLabel.setText("Employee Found: " + firstName + " " + lastName);
                     } else {
-                        // Employee not found
+                       
                         resultLabel.setText("Employee Not Found");
                     }
                 }
