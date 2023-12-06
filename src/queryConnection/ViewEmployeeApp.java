@@ -34,26 +34,24 @@ class ViewTableFrame extends JFrame {
     	final String url = "jdbc:mysql://triton.towson.edu:3360/?serverTimezoneEST#/"+username+"db";
 
         try (Connection connection = DriverManager.getConnection(url, username, password)) {
-            String tableName = "WORKER"; // Update with your table name
-
-            String sql = "SELECT * FROM " + tableName;
+            String sql = "SELECT * FROM eziegl4db.Worker";
             try (Statement statement = connection.createStatement();
                  ResultSet resultSet = statement.executeQuery(sql)) {
-                StringBuilder resultText = new StringBuilder("Table Data:\n");
+                StringBuilder resultText = new StringBuilder("Table Data:\n\n");
 
                 ResultSetMetaData metaData = resultSet.getMetaData();
                 int columnCount = metaData.getColumnCount();
 
                 // Append column names
                 for (int i = 1; i <= columnCount; i++) {
-                    resultText.append(metaData.getColumnName(i)).append("\t");
+                    resultText.append(metaData.getColumnName(i)).append("\t\t");
                 }
-                resultText.append("\n");
+                resultText.append("\n\n");
 
                 // Append row data
                 while (resultSet.next()) {
                     for (int i = 1; i <= columnCount; i++) {
-                        resultText.append(resultSet.getString(i)).append("\t");
+                        resultText.append(resultSet.getString(i)).append("\t\t");
                     }
                     resultText.append("\n");
                 }

@@ -53,16 +53,15 @@ class DeleteEmployee extends JFrame {
     	final String url = "jdbc:mysql://triton.towson.edu:3360/?serverTimezoneEST#/"+username+"db";
 
         try (Connection connection = DriverManager.getConnection(url, username, password)) {
-            String sql = "SELECT * FROM employee WHERE employee_id = ?";
+            String sql = "SELECT * FROM Eziegl4db.Worker WHERE employee_id = ?";
             try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
                 preparedStatement.setString(1, employeeId);
 
                 try (ResultSet resultSet = preparedStatement.executeQuery()) {
                     if (resultSet.next()) {
-                     
-                        String firstName = resultSet.getString("first_name");
-                        String lastName = resultSet.getString("last_name");
-                        resultLabel.setText("Employee Found: " + firstName + " " + lastName);
+                    	// Employee found
+                        String name = resultSet.getString("Name");
+                        resultLabel.setText("Employee Found: " + name);
                     } else {
                        
                         resultLabel.setText("Employee Not Found");
@@ -89,7 +88,7 @@ class DeleteEmployee extends JFrame {
     	final String url = "jdbc:mysql://triton.towson.edu:3360/?serverTimezoneEST#/"+username+"db";
 
         try (Connection connection = DriverManager.getConnection(url, username, password)) {
-            String sql = "DELETE FROM employee WHERE employee_id = ?";
+            String sql = "DELETE FROM eziegl4db.Worker WHERE employee_id = ?";
             try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
                 preparedStatement.setString(1, employeeId);
 
