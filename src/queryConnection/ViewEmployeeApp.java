@@ -29,12 +29,12 @@ class ViewTableFrame extends JFrame {
 
     private void viewTable() {
         // JDBC database connection parameters
-        String url = "jdbc:mysql://localhost:3306/your_database"; // Update with your database URL
-        String username = "your_username";
-        String password = "your_password";
+    	final String username = "eziegl4";
+    	final String password = "COSC*26yaj";
+    	final String url = "jdbc:mysql://triton.towson.edu:3360/?serverTimezoneEST#/"+username+"db";
 
         try (Connection connection = DriverManager.getConnection(url, username, password)) {
-            String tableName = "your_table_name"; // Update with your table name
+            String tableName = "WORKER"; // Update with your table name
 
             String sql = "SELECT * FROM " + tableName;
             try (Statement statement = connection.createStatement();
