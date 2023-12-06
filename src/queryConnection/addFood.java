@@ -42,6 +42,8 @@ public class addFood extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 addFoodToDatabase();
+
+                item temp_item = new item(priceTextField.getText(),categoryComboBox.getSelectedItem().toString() ,descriptionTextField.getText(),itemIdTextField.getText() );
             }
         });
         panel.add(addButton);

@@ -3,10 +3,10 @@ package queryConnection;
 import java.util.Currency;
 
 public class item {
-    private Currency price;
+    private String price;
     private String category, description, ItemID;
  
-    public item(Currency price,String category, String description, String ItemID ) {
+    public item(String price,String category, String description, String ItemID ) {
         this.price = price;
         this.category= category;
         this.ItemID = ItemID;
@@ -22,10 +22,10 @@ public class item {
     public String getItemID() {
         return ItemID;
     }
-    public Currency getPrice() {
+    public String getPrice() {
         return price;
     }
-    
+
     public void setCategory(String category) {
         this.category = category;
     }
@@ -34,7 +34,7 @@ public class item {
     }
     public void setItemID(String itemID) {
         ItemID = itemID;
-    }public void setPrice(Currency price) {
+    }public void setPrice(String price) {
         this.price = price;
     }
     
