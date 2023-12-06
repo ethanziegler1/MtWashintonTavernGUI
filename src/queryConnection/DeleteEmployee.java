@@ -48,9 +48,9 @@ class DeleteEmployee extends JFrame {
         }
 
         // JDBC database connection parameters
-        String url = "jdbc:mysql://localhost:3306/your_database"; // Update with your database URL
-        String username = "your_username";
-        String password = "your_password";
+        final String username = "eziegl4";
+    	final String password = "COSC*26yaj";
+    	final String url = "jdbc:mysql://triton.towson.edu:3360/?serverTimezoneEST#/"+username+"db";
 
         try (Connection connection = DriverManager.getConnection(url, username, password)) {
             String sql = "SELECT * FROM employee WHERE employee_id = ?";
@@ -84,9 +84,9 @@ class DeleteEmployee extends JFrame {
         }
 
         // JDBC database connection parameters
-        String url = "jdbc:mysql://localhost:3306/your_database"; // Update with your database URL
-        String username = "your_username";
-        String password = "your_password";
+        final String username = "eziegl4";
+    	final String password = "COSC*26yaj";
+    	final String url = "jdbc:mysql://triton.towson.edu:3360/?serverTimezoneEST#/"+username+"db";
 
         try (Connection connection = DriverManager.getConnection(url, username, password)) {
             String sql = "DELETE FROM employee WHERE employee_id = ?";

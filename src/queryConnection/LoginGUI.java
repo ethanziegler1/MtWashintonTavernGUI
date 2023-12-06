@@ -68,4 +68,11 @@ public class LoginGUI extends JFrame {
      
         loginGUI.setVisible(true);
     }
+    
+    private static void employeeManagementApp() {
+        
+        JFrame temp = new EmployeeManagementApp("Employee Management");
+        temp.setVisible(true);
+      System.out.println("Opening Management App...");
+    }
 }
