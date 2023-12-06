@@ -11,6 +11,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -43,11 +44,25 @@ public class DatabaseFrame extends JFrame {
      * Create the frame.
      */
     public DatabaseFrame() {
+    	try {
+    		Class.forName("com.mysql.cj.jdbc.Driver");
+    	} catch (ClassNotFoundException e) {
+    		System.out.println(e);
+    	}
+    	final String ID = "eziegl4";
+    	final String PW = "COSC*26yaj";
+    	final String SERVER = "jdbc:mysql://triton.towson.edu:3360/?serverTimezoneEST#/"+ID+"db";
+    	try {
+    		Connection con = DriverManager.getConnection(SERVER, ID, PW);
+    		Statement stmt = con.createStatement();
+    		ResultSet rs = stmt.executeQuery("Select * from eziegl4db.Food");
+    	
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(450, 75, 750, 750);
         setResizable(true);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+        contentPane.setBackground(Color.YELLOW);
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
@@ -64,21 +79,33 @@ public class DatabaseFrame extends JFrame {
         textField.setColumns(10);
 
 
-        JLabel lblUsername = new JLabel("Query");
-        lblUsername.setBackground(Color.BLACK);
-        lblUsername.setForeground(Color.BLACK);
-        lblUsername.setFont(new Font("Tahoma", Font.PLAIN, 31));
-        lblUsername.setBounds(150, 250, 193, 52);
-        contentPane.add(lblUsername);
+        JLabel Entity = new JLabel("Entity");
+        Entity.setBackground(Color.BLACK);
+        Entity.setForeground(Color.BLACK);
+        Entity.setFont(new Font("Tahoma", Font.PLAIN, 31));
+        Entity.setBounds(150, 250, 193, 52);
+        contentPane.add(Entity);
+        
+        JLabel Attribute = new JLabel("Attribute");
+        Attribute.setBackground(Color.BLACK);
+        Attribute.setForeground(Color.BLACK);
+        Attribute.setFont(new Font("Tahoma", Font.PLAIN, 31));
+        Attribute.setBounds(125, 350, 193, 52);
+        contentPane.add(Attribute);
 
-       
+        textField = new JTextField();
+        textField.setFont(new Font("Tahoma", Font.PLAIN, 32));
+        textField.setBounds(250, 350, 281, 68);
+        contentPane.add(textField);
+        textField.setColumns(10);
+        
         btnNewButton = new JButton("Submit Query");
         btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 26));
-        btnNewButton.setBounds(285, 392, 200, 73);
+        btnNewButton.setBounds(285, 500, 200, 73);
         btnNewButton.addActionListener(new ActionListener() {
-
+        	
             public void actionPerformed(ActionEvent e) {
-                String userName = textField.getText();
+                String query = textField.getText();
                 try {
                     Connection connection = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/swing_demo",
                         "root", "root");
@@ -86,7 +113,7 @@ public class DatabaseFrame extends JFrame {
                     PreparedStatement st = (PreparedStatement) connection
                         .prepareStatement("Select name, password from student where name=? and password=?");
 
-                    st.setString(1, userName);
+                    st.setString(1, query);
                     ResultSet rs = st.executeQuery();
                     if (rs.next()) {
                         JOptionPane.showMessageDialog(btnNewButton, "Query Sent");
@@ -98,12 +125,23 @@ public class DatabaseFrame extends JFrame {
                 }
             }
         });
-
+        JLabel queryResult = new JLabel();
+        
+        
+        queryResult.setBackground(Color.BLACK);
+        queryResult.setForeground(Color.BLACK);
+        queryResult.setFont(new Font("Tahoma", Font.PLAIN, 31));
+        queryResult.setBounds(100, 100, 500, 500);
+        contentPane.add(queryResult);
+        
         contentPane.add(btnNewButton);
 
         label = new JLabel("");
         label.setBounds(0, 5, 1500, 1000);
         label.setAlignmentX(50);
         contentPane.add(label);
+    	} catch(SQLException e) {
+    		System.err.println(e);
+    	}
     }
 }
