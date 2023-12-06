@@ -68,8 +68,9 @@ class EmployeeRegistrationFrame extends JFrame {
             	String Name = nameField.getText();
             	String StaffType = staffTypeComboBox.getItemAt(2);
             	String Salary = salaryField.getText();
-                JOptionPane.showMessageDialog(EmployeeRegistrationFrame.this, "Employee Registered!");
+                
                 addEmployeeToDatabase(EmployeeID, SSN, HoursWorked, Name, StaffType, Salary);
+
             }
         });
         add(registerButton);
@@ -86,18 +87,20 @@ class EmployeeRegistrationFrame extends JFrame {
             }
         }
     }
-    public static void addEmployeeToDatabase(empID,SSN,hours,name,type,salary) {
+    public void addEmployeeToDatabase(String empID,String SSN, String hours, String name, String type,String salary) {
             // JDBC database connection parameters
             final String username = "eziegl4";
         	final String password = "COSC*26yaj";
         	final String url = "jdbc:mysql://triton.towson.edu:3360/?serverTimezoneEST#/"+username+"db";
 
             try (Connection connection = DriverManager.getConnection(url, username, password)) {
-                String sql = "DELETE FROM eziegl4db.Worker WHERE employee_id = ?";
-                String sql = "INSERT INTO eziegl4db.Worker (EmployeeID, SSN, Name, StaffType, Salary, PhoneNumbe) VALUES (";
+                String sql = "DELETE FROM eziegl4db.Worker WHERE employee_id = ?;\n INSERT INTO eziegl4db.Worker (EmployeeID, SSN, Name, StaffType, Salary, PhoneNumbe) VALUES ("+empID;
+                
                 try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-                    preparedStatement.setString(1, employeeId);
+                    preparedStatement.setString(1, empID);
                 }
+
+                JOptionPane.showMessageDialog(EmployeeRegistrationFrame.this, "Employee Registered!");
             } catch (SQLException ex) {
                 ex.printStackTrace();
                 JOptionPane.showMessageDialog(this, "Error connecting to the database");

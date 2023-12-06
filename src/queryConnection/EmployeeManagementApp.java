@@ -6,46 +6,45 @@ import java.awt.event.ActionListener;
 import queryConnection.*;
 
 
-public class EmployeeManagementApp {
+public class EmployeeManagementApp extends JFrame {
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            EmployeeManagementFrame("Employee Management");
+       
+            new EmployeeManagementApp("Employee Management");
            
-            
-        });
+        
     }
 
 
-    private static JFrame frame = new JFrame();
+
     private static JLabel resultLabel;
 
-    public static void EmployeeManagementFrame(String title) {
+    public EmployeeManagementApp(String title) {
         
-        frame = new JFrame(title);
-        frame.setLayout(new GridLayout(2, 2, 5, 5));
+        setTitle(title);
+        setLayout(new GridLayout(2, 2, 5, 5));
 
         resultLabel = new JLabel();
 
         JButton searchButton = new JButton("Search Employee");
         searchButton.addActionListener(e -> searchEmployee());
-        frame.add(searchButton);
+        add(searchButton);
 
         JButton deleteButton = new JButton("Delete Employee");
         deleteButton.addActionListener(e -> deleteEmployee());
-        frame.add(deleteButton);
+        add(deleteButton);
 
         JButton createEmp = new JButton("Create Employee");
         createEmp.addActionListener(e -> createEmployee());
-        frame.add(createEmp);
+        add(createEmp);
 
         JButton viewStaffButton = new JButton("View Staff");
         viewStaffButton.addActionListener(e -> viewStaff());
-        frame.add(viewStaffButton);
+        add(viewStaffButton);
 
-        frame.add(resultLabel);
-        frame.setSize(400, 150);
-            frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
-            frame.setVisible(true);
+        add(resultLabel);
+        setSize(400, 150);
+            setDefaultCloseOperation(EXIT_ON_CLOSE);
+            setVisible(true);
     }
 
     private static void searchEmployee() {
