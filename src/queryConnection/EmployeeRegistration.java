@@ -56,15 +56,15 @@ class EmployeeRegistrationFrame extends JFrame {
         generateUniqueEmployeeId();
         add(employeeIdLabel);
 
-        add(new JLabel("")); // Empty cell for spacing
+        add(new JLabel("")); 
 
         JButton registerButton = new JButton("Register");
         registerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Add code to save employee information to the database (not implemented in this example)
+               
                 JOptionPane.showMessageDialog(EmployeeRegistrationFrame.this, "Employee Registered!");
-                generateUniqueEmployeeId(); // Generate a new unique employee ID for the next registration
+                generateUniqueEmployeeId(); 
             }
         });
         add(registerButton);
