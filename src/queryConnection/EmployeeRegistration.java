@@ -4,6 +4,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
@@ -11,7 +15,7 @@ import java.util.Set;
 
 
 class EmployeeRegistrationFrame extends JFrame {
-    private JTextField ssnField, firstNameField, lastNameField, hoursField, salaryField, phoneNumberField;
+    private JTextField ssnField, nameField, hoursField, salaryField, phoneNumberField;
     private JComboBox<String> staffTypeComboBox;
     private JLabel employeeIdLabel, employeeIdValueLabel;
 
@@ -26,13 +30,9 @@ class EmployeeRegistrationFrame extends JFrame {
         ssnField = new JTextField();
         add(ssnField);
 
-        add(new JLabel("First Name:"));
-        firstNameField = new JTextField();
-        add(firstNameField);
-
-        add(new JLabel("Last Name:"));
-        lastNameField = new JTextField();
-        add(lastNameField);
+        add(new JLabel("Name:"));
+        nameField = new JTextField();
+        add(nameField);
 
         add(new JLabel("Staff Type:"));
         String[] staffTypes = {"Cook", "Server", "Host"};
@@ -62,9 +62,14 @@ class EmployeeRegistrationFrame extends JFrame {
         registerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-               
+            	String EmployeeID = employeeIdLabel.getText();
+            	String SSN = ssnField.getText();
+            	String HoursWorked = hoursField.getText();
+            	String Name = nameField.getText();
+            	String StaffType = staffTypeComboBox.getItemAt(2);
+            	String Salary = salaryField.getText();
                 JOptionPane.showMessageDialog(EmployeeRegistrationFrame.this, "Employee Registered!");
-                generateUniqueEmployeeId(); 
+                addEmployeeToDatabase(EmployeeID, SSN, HoursWorked, Name, StaffType, Salary);
             }
         });
         add(registerButton);
@@ -81,4 +86,21 @@ class EmployeeRegistrationFrame extends JFrame {
             }
         }
     }
+    public static void addEmployeeToDatabase(empID,SSN,hours,name,type,salary) {
+            // JDBC database connection parameters
+            final String username = "eziegl4";
+        	final String password = "COSC*26yaj";
+        	final String url = "jdbc:mysql://triton.towson.edu:3360/?serverTimezoneEST#/"+username+"db";
+
+            try (Connection connection = DriverManager.getConnection(url, username, password)) {
+                String sql = "DELETE FROM eziegl4db.Worker WHERE employee_id = ?";
+                String sql = "INSERT INTO eziegl4db.Worker (EmployeeID, SSN, Name, StaffType, Salary, PhoneNumbe) VALUES (";
+                try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+                    preparedStatement.setString(1, employeeId);
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+                JOptionPane.showMessageDialog(this, "Error connecting to the database");
+            }
+        }
 }
