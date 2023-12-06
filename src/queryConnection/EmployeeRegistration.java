@@ -8,16 +8,7 @@ import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
 
-public class EmployeeRegistration {
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            JFrame frame = new EmployeeRegistrationFrame("Employee Registration");
-            frame.setSize(400, 300);
-            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            frame.setVisible(true);
-        });
-    }
-}
+
 
 class EmployeeRegistrationFrame extends JFrame {
     private JTextField ssnField, firstNameField, lastNameField, hoursField, salaryField, phoneNumberField;
@@ -29,7 +20,8 @@ class EmployeeRegistrationFrame extends JFrame {
     public EmployeeRegistrationFrame(String title) {
         super(title);
         setLayout(new GridLayout(9, 2, 5, 5));
-
+        this.setSize(400, 300);
+        this.setDefaultCloseOperation(this.DISPOSE_ON_CLOSE);
         add(new JLabel("SSN:"));
         ssnField = new JTextField();
         add(ssnField);

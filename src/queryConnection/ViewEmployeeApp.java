@@ -4,16 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.sql.*;
 
-public class ViewEmployeeApp {
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            JFrame frame = new ViewTableFrame("View Table");
-            frame.setSize(400, 300);
-            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            frame.setVisible(true);
-        });
-    }
-}
+
 
 class ViewTableFrame extends JFrame {
     private JTextArea resultTextArea;
@@ -31,6 +22,9 @@ class ViewTableFrame extends JFrame {
         JButton viewButton = new JButton("View Table");
         viewButton.addActionListener(e -> viewTable());
         add(viewButton, BorderLayout.SOUTH);
+
+        this.setSize(400, 300);
+            this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
 
     private void viewTable() {

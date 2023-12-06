@@ -10,16 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class EmployeeSearchApp {
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            JFrame frame = new EmployeeSearchFrame("Employee Search");
-            frame.setSize(300, 150);
-            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            frame.setVisible(true);
-        });
-    }
-}
+
 
 class EmployeeSearchFrame extends JFrame {
     private JTextField employeeIdField;
@@ -28,7 +19,8 @@ class EmployeeSearchFrame extends JFrame {
     public EmployeeSearchFrame(String title) {
         super(title);
         setLayout(new GridLayout(3, 2, 5, 5));
-
+        this.setSize(300, 150);
+        this.setDefaultCloseOperation(this.DISPOSE_ON_CLOSE);
         add(new JLabel("Employee ID:"));
         employeeIdField = new JTextField();
         add(employeeIdField);

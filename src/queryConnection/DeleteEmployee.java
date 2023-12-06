@@ -10,25 +10,16 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class DeleteEmployee {
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            JFrame frame = new DeleteEmployeeFrame("Delete Employee");
-            frame.setSize(300, 150);
-            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            frame.setVisible(true);
-        });
-    }
-}
 
-class DeleteEmployeeFrame extends JFrame {
+class DeleteEmployee extends JFrame {
     private JTextField employeeIdField;
     private JLabel resultLabel;
-
-    public DeleteEmployeeFrame(String title) {
+    
+    public DeleteEmployee(String title) {
         super(title);
         setLayout(new GridLayout(3, 2, 5, 5));
-
+        this.setSize(300, 150);
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         add(new JLabel("Employee ID:"));
         employeeIdField = new JTextField();
         add(employeeIdField);
@@ -44,6 +35,8 @@ class DeleteEmployeeFrame extends JFrame {
         JButton deleteButton = new JButton("Delete");
         deleteButton.addActionListener(e -> deleteEmployee());
         add(deleteButton);
+
+        //main();
     }
 
     private void searchEmployee() {
