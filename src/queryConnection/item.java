@@ -4,7 +4,9 @@ import java.util.Currency;
 
 public class item {
     private String price;
-    private String category, description, ItemID;
+    private String category;
+    private static String description;
+    private String ItemID;
  
     public item(String price,String category, String description, String ItemID ) {
         this.price = price;
@@ -16,7 +18,7 @@ public class item {
     public String getCategory() {
         return category;
     }
-    public String getDescription() {
+    public static String getDescription() {
         return description;
     }
     public String getItemID() {
@@ -30,12 +32,17 @@ public class item {
         this.category = category;
     }
     public void setDescription(String description) {
-        this.description = description;
+        item.description = description;
     }
     public void setItemID(String itemID) {
         ItemID = itemID;
     }public void setPrice(String price) {
         this.price = price;
+    }
+
+    @Override
+    public String toString() {
+        return description +" : " + price;
     }
     
 }
