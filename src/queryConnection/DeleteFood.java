@@ -12,7 +12,7 @@ import java.sql.SQLException;
 
 
 class DeleteFood extends JFrame {
-    private JTextField employeeIdField;
+    private JTextField FoodIdField;
     private JLabel resultLabel;
     
     public DeleteFood(String title) {
@@ -20,9 +20,9 @@ class DeleteFood extends JFrame {
         setLayout(new GridLayout(3, 2, 5, 5));
         this.setSize(300, 150);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        add(new JLabel("Employee ID:"));
-        employeeIdField = new JTextField();
-        add(employeeIdField);
+        add(new JLabel("Item ID:"));
+        FoodIdField = new JTextField();
+        add(FoodIdField);
 
         JButton searchButton = new JButton("Search");
         searchButton.addActionListener(e -> searchFood());
@@ -35,14 +35,14 @@ class DeleteFood extends JFrame {
         JButton deleteButton = new JButton("Delete");
         deleteButton.addActionListener(e -> deleteFood());
         add(deleteButton);
-
+        this.setVisible(true);
         //main();
     }
 
     private void searchFood() {
-        String employeeId = employeeIdField.getText().trim();
+        String FoodId = FoodIdField.getText().trim();
 
-        if (employeeId.isEmpty()) {
+        if (FoodId.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Please enter an Employee ID");
             return;
         }
@@ -53,9 +53,9 @@ class DeleteFood extends JFrame {
     	final String url = "jdbc:mysql://triton.towson.edu:3360/?serverTimezoneEST#/"+username+"db";
 
         try (Connection connection = DriverManager.getConnection(url, username, password)) {
-            String sql = "SELECT * FROM Eziegl4db.Food WHERE Food_id = ?";
+            String sql = "SELECT * FROM Eziegl4db.Food WHERE ItemID = ?";
             try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-                preparedStatement.setString(1, employeeId);
+                preparedStatement.setString(1, FoodId);
 
                 try (ResultSet resultSet = preparedStatement.executeQuery()) {
                     if (resultSet.next()) {
@@ -75,9 +75,9 @@ class DeleteFood extends JFrame {
     }
 
     private void deleteFood() {
-        String employeeId = employeeIdField.getText().trim();
+        String FoodId = FoodIdField.getText().trim();
 
-        if (employeeId.isEmpty()) {
+        if (FoodId.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Please enter an Employee ID");
             return;
         }
@@ -88,9 +88,9 @@ class DeleteFood extends JFrame {
     	final String url = "jdbc:mysql://triton.towson.edu:3360/?serverTimezoneEST#/"+username+"db";
 
         try (Connection connection = DriverManager.getConnection(url, username, password)) {
-            String sql = "DELETE FROM eziegl4db.Worker WHERE employee_id = ?";
+            String sql = "DELETE FROM eziegl4db.Food WHERE ItemID = ?";
             try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-                preparedStatement.setString(1, employeeId);
+                preparedStatement.setString(1, FoodId);
 
                 int rowsAffected = preparedStatement.executeUpdate();
 

@@ -14,23 +14,18 @@ import java.sql.SQLException;
 public class showFood extends JFrame {
     private JTable foodTable;
 
+    
     public showFood() {
-        setTitle("Display Food from Database");
-        setSize(600, 400);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        createGUI();
-    }
-
-    private void createGUI() {
         JPanel panel = new JPanel(new BorderLayout());
-
+        this. setTitle("Display Food from Database");
+        this.setSize(600, 400);
+        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("Price");
         model.addColumn("Category");
         model.addColumn("Description");
         model.addColumn("Item ID");
-
+       
         foodTable = new JTable(model);
         JScrollPane scrollPane = new JScrollPane(foodTable);
         panel.add(scrollPane, BorderLayout.CENTER);
@@ -54,6 +49,7 @@ public class showFood extends JFrame {
         });
 
         add(panel);
+        this.setVisible(true);
     }
 
     private void displayFoodFromDatabase() {
@@ -61,19 +57,19 @@ public class showFood extends JFrame {
         model.setRowCount(0);
 
         // Database connection parameters
-        String url = "jdbc:mysql://localhost:3306/your_database";
-        String username = "your_username";
-        String password = "your_password";
+        final String username = "eziegl4";
+    	final String password = "COSC*26yaj";
+    	final String url = "jdbc:mysql://triton.towson.edu:3360/?serverTimezoneEST#/"+username+"db";
 
         try (Connection connection = DriverManager.getConnection(url, username, password)) {
-            String query = "SELECT * FROM foods";
+            String query = "SELECT * FROM eziegl4db.Food";
             try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
                 try (ResultSet resultSet = preparedStatement.executeQuery()) {
                     while (resultSet.next()) {
                         String price = resultSet.getString("price");
                         String category = resultSet.getString("category");
                         String description = resultSet.getString("description");
-                        String itemId = resultSet.getString("item_id");
+                        String itemId = resultSet.getString("ItemID");
 
                         model.addRow(new Object[]{price, category, description, itemId});
                     }

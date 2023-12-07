@@ -49,6 +49,8 @@ public class addFood extends JFrame {
         panel.add(addButton);
 
         add(panel);
+
+        this.setVisible(true);
        
     }
 
@@ -65,12 +67,12 @@ public class addFood extends JFrame {
     	final String url = "jdbc:mysql://triton.towson.edu:3360/?serverTimezoneEST#/"+username+"db";
 
         try (Connection connection = DriverManager.getConnection(url, username, password)) {
-            String query = "INSERT INTO Food (Price, Categor, Description, itemID) VALUES (?, ?, ?, ?)";
+            String query = "INSERT INTO eziegl4db.Food (itemID, Price, Category, Description) VALUES (?, ?, ?, ?)";
             try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-                preparedStatement.setString(1, price);
-                preparedStatement.setString(2, category);
-                preparedStatement.setString(3, description);
-                preparedStatement.setString(4, itemId);
+                preparedStatement.setString(1, itemId);
+                preparedStatement.setString(2, price);
+                preparedStatement.setString(3, category);
+                preparedStatement.setString(4, description);
 
                 int rowsAffected = preparedStatement.executeUpdate();
 

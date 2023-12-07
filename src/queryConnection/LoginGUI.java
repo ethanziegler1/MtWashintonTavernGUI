@@ -38,6 +38,7 @@ public class LoginGUI extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 if (validateLogin(idField.getText())) {
                     JOptionPane.showMessageDialog(LoginGUI.this, "Login successful!");
+                    windowSwap();
                 } else {
                     JOptionPane.showMessageDialog(LoginGUI.this, "Invalid Employee ID or SSN", "Error", JOptionPane.ERROR_MESSAGE);
                 }

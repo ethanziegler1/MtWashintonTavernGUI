@@ -10,7 +10,7 @@ public class foodMenu extends JFrame {
     public foodMenu() {
         // Set frame properties
         setTitle("Food Menu");
-        setSize(400, 300);
+        setSize(400, 80);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         // Center the frame on the screen
 
@@ -32,33 +32,22 @@ public class foodMenu extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Add functionality to show items
-                JOptionPane.showMessageDialog(foodMenu.this, "Showing items...");
+                //JOptionPane.showMessageDialog(foodMenu.this, "Showing items...");
+                new showFood();
             }
         });
 
         addItemButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Add functionality to add item
-                String newItem = JOptionPane.showInputDialog(foodMenu.this, "Enter new item:");
-                // You can handle the addition of the item here
-                if (newItem != null && !newItem.isEmpty()) {
-                    // Add the item to the menu
-                    JOptionPane.showMessageDialog(foodMenu.this, "Item added: " + newItem);
-                }
+               new addFood();
             }
         });
 
         deleteItemButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Add functionality to delete item
-                String itemToDelete = JOptionPane.showInputDialog(foodMenu.this, "Enter item to delete:");
-                // You can handle the deletion of the item here
-                if (itemToDelete != null && !itemToDelete.isEmpty()) {
-                    // Delete the item from the menu
-                    JOptionPane.showMessageDialog(foodMenu.this, "Item deleted: " + itemToDelete);
-                }
+                new DeleteFood("Delete Food");
             }
         });
 
