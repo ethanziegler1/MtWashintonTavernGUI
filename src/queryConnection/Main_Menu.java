@@ -55,6 +55,7 @@ public class Main_Menu extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Handle Customer button click
+            	new Customer_Menu();
                 System.out.println("Customer button clicked");
             }
         });
