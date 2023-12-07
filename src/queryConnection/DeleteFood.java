@@ -53,18 +53,18 @@ class DeleteFood extends JFrame {
     	final String url = "jdbc:mysql://triton.towson.edu:3360/?serverTimezoneEST#/"+username+"db";
 
         try (Connection connection = DriverManager.getConnection(url, username, password)) {
-            String sql = "SELECT * FROM Eziegl4db.Food WHERE ItemID = ?";
+            String sql = "SELECT * FROM eziegl4db.Food WHERE ItemID = ?";
             try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
                 preparedStatement.setString(1, FoodId);
 
                 try (ResultSet resultSet = preparedStatement.executeQuery()) {
                     if (resultSet.next()) {
                     	// Employee found
-                        String name = resultSet.getString("Name");
-                        resultLabel.setText("Employee Found: " + name);
+                        String name = resultSet.getString("description");
+                        resultLabel.setText("Food Found: " + name);
                     } else {
                        
-                        resultLabel.setText("Employee Not Found");
+                        resultLabel.setText("Food Not Found");
                     }
                 }
             }
@@ -78,7 +78,7 @@ class DeleteFood extends JFrame {
         String FoodId = FoodIdField.getText().trim();
 
         if (FoodId.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Please enter an Employee ID");
+            JOptionPane.showMessageDialog(this, "Please enter an Food ID");
             return;
         }
 
