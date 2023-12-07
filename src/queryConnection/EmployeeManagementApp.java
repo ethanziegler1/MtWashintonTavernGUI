@@ -41,10 +41,19 @@ public class EmployeeManagementApp extends JFrame {
         viewStaffButton.addActionListener(e -> viewStaff());
         add(viewStaffButton);
 
+        JButton updateStaff = new JButton("Update Staff Info");
+        updateStaff.addActionListener(e -> updateStaff());
+        add(updateStaff);
+
         add(resultLabel);
         setSize(400, 150);
-            setDefaultCloseOperation(EXIT_ON_CLOSE);
+            setDefaultCloseOperation(DISPOSE_ON_CLOSE);
             setVisible(true);
+    }
+
+    private static void updateStaff() {
+        System.out.println("Update Staff loading...");
+        new UpdateEmployee();
     }
 
     private static void searchEmployee() {

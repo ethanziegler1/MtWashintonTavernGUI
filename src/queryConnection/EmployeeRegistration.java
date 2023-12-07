@@ -93,7 +93,7 @@ class EmployeeRegistrationFrame extends JFrame {
             final String username = "eziegl4";
         	final String password = "COSC*26yaj";
         	final String url = "jdbc:mysql://triton.towson.edu:3360/?serverTimezoneEST#/"+username+"db";
-            empID = "2";
+            
             try (Connection connection = DriverManager.getConnection(url, username, password)) {
                 String sql = "INSERT INTO EarningsPayment (TID, TotalCost, Tip, ServerID) VALUES (?, ?, ?,?);INSERT INTO Worker (EmployeeID, SSN, HoursWorked, Name, StaffType, Salary, PhoneNumber) VALUES (?,?,?,?,?,?,?);";
                 String temp1 =""+(Math.floor(Math.random() * (100 - 10) + 10) / 100), temp2=""+(Math.floor(Math.random() * (30 - 1) + 1) / 100);

@@ -12,7 +12,7 @@ public class Main_Menu extends JFrame {
         setTitle("My GUI");
 
         // Set the default close operation
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
         // Create buttons
         JButton foodButton = new JButton("Food");
@@ -38,6 +38,7 @@ public class Main_Menu extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Handle Food button click
+                new foodMenu();
                 System.out.println("Food button clicked");
             }
         });
@@ -45,7 +46,7 @@ public class Main_Menu extends JFrame {
         employeeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Handle Employee button click
+                new EmployeeManagementApp("Employee Management App");
                 System.out.println("Employee button clicked");
             }
         });
