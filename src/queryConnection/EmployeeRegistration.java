@@ -95,8 +95,9 @@ class EmployeeRegistrationFrame extends JFrame {
         	final String url = "jdbc:mysql://triton.towson.edu:3360/?serverTimezoneEST#/"+username+"db";
             
             try (Connection connection = DriverManager.getConnection(url, username, password)) {
-                String sql = "INSERT INTO EarningsPayment (TID, TotalCost, Tip, ServerID) VALUES (?, ?, ?,?);INSERT INTO Worker (EmployeeID, SSN, HoursWorked, Name, StaffType, Salary, PhoneNumber) VALUES (?,?,?,?,?,?,?);";
+                String sql = "INSERT INTO eziegl4db.EarningsPayment (TID, TotalCost, Tip, ServerID) VALUES (?, ?, ?,?);INSERT INTO eziegl4db.Worker (EmployeeID, SSN, HoursWorked, Name, StaffType, Salary, PhoneNumber) VALUES (?,?,?,?,?,?,?);";
                 String temp1 =""+(Math.floor(Math.random() * (100 - 10) + 10) / 100), temp2=""+(Math.floor(Math.random() * (30 - 1) + 1) / 100);
+                
                 try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
                     preparedStatement.setString(1, empID);
                     preparedStatement.setString(2, temp1);
@@ -111,9 +112,16 @@ class EmployeeRegistrationFrame extends JFrame {
                     preparedStatement.setString(10, salary);
                     preparedStatement.setString(11, phone);
 
-                
+                int rowsAffected = preparedStatement.executeUpdate();
                 JOptionPane.showMessageDialog(EmployeeRegistrationFrame.this, "Employee Registered!");
-                this.dispose();
+                //this.dispose();
+
+                if (rowsAffected > 0) {
+                    JOptionPane.showMessageDialog(this, "Food added to database successfully.");
+                   
+                } else {
+                    JOptionPane.showMessageDialog(this, "Failed to add food to database.");
+                }
                 }
 
                 
