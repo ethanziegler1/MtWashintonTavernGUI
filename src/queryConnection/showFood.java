@@ -56,7 +56,6 @@ public class showFood extends JFrame {
         DefaultTableModel model = (DefaultTableModel) foodTable.getModel();
         model.setRowCount(0);
 
-        // Database connection parameters
         final String username = "eziegl4";
     	final String password = "COSC*26yaj";
     	final String url = "jdbc:mysql://triton.towson.edu:3360/?serverTimezoneEST#/"+username+"db";

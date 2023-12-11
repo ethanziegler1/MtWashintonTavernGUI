@@ -36,7 +36,6 @@ class DeleteEmployee extends JFrame {
         deleteButton.addActionListener(e -> deleteEmployee());
         add(deleteButton);
 
-        //main();
     }
 
     private void searchEmployee() {
@@ -47,7 +46,6 @@ class DeleteEmployee extends JFrame {
             return;
         }
 
-        // JDBC database connection parameters
         final String username = "eziegl4";
     	final String password = "COSC*26yaj";
     	final String url = "jdbc:mysql://triton.towson.edu:3360/?serverTimezoneEST#/"+username+"db";
@@ -59,7 +57,6 @@ class DeleteEmployee extends JFrame {
 
                 try (ResultSet resultSet = preparedStatement.executeQuery()) {
                     if (resultSet.next()) {
-                    	// Employee found
                         String name = resultSet.getString("Name");
                         resultLabel.setText("Employee Found: " + name);
                     } else {
@@ -82,7 +79,6 @@ class DeleteEmployee extends JFrame {
             return;
         }
 
-        // JDBC database connection parameters
         final String username = "eziegl4";
     	final String password = "COSC*26yaj";
     	final String url = "jdbc:mysql://triton.towson.edu:3360/?serverTimezoneEST#/"+username+"db";
@@ -96,7 +92,7 @@ class DeleteEmployee extends JFrame {
 
                 if (rowsAffected > 0) {
                     JOptionPane.showMessageDialog(this, "Employee Deleted Successfully");
-                    resultLabel.setText(""); // Clear the result label after deletion
+                    resultLabel.setText(""); 
                 } else {
                     JOptionPane.showMessageDialog(this, "Employee Not Found");
                 }

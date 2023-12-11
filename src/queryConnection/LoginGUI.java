@@ -77,12 +77,10 @@ public class LoginGUI extends JFrame {
 
                 try (ResultSet resultSet = preparedStatement.executeQuery()) {
                     if (resultSet.next()) {
-                        // Employee found
                         String name = resultSet.getString("EmployeeID");
                         spid =name;
                         return true;
                     } else {
-                        // Employee not found
                         JOptionPane.showMessageDialog(this, "Login Invalid");
                     }
                 }

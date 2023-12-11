@@ -30,7 +30,6 @@ class ViewTransactions extends JFrame {
     }
 
     private void viewTable() {
-        // JDBC database connection parameters
     	final String username = "eziegl4";
     	final String password = "COSC*26yaj";
     	final String url = "jdbc:mysql://triton.towson.edu:3360/?serverTimezoneEST#/"+username+"db";
@@ -44,13 +43,11 @@ class ViewTransactions extends JFrame {
                 ResultSetMetaData metaData = resultSet.getMetaData();
                 int columnCount = metaData.getColumnCount();
 
-                // Append column names
                 for (int i = 1; i <= columnCount; i++) {
                     resultText.append(metaData.getColumnName(i)).append("\t\t");
                 }
                 resultText.append("\n\n");
 
-                // Append row data
                 while (resultSet.next()) {
                     for (int i = 1; i <= columnCount; i++) {
                         resultText.append(resultSet.getString(i)).append("\t\t");

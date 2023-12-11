@@ -89,7 +89,6 @@ class EmployeeRegistrationFrame extends JFrame {
         }
     }
     public void addEmployeeToDatabase(String empID,String SSN, String hours, String name, String type,String salary,String phone) {
-            // JDBC database connection parameters
             final String username = "eziegl4";
         	final String password = "COSC*26yaj";
         	final String url = "jdbc:mysql://triton.towson.edu:3360/?serverTimezoneEST#/"+username+"db";
@@ -114,7 +113,6 @@ class EmployeeRegistrationFrame extends JFrame {
 
                 int rowsAffected = preparedStatement.executeUpdate();
                 JOptionPane.showMessageDialog(EmployeeRegistrationFrame.this, "Employee Registered!");
-                //this.dispose();
 
                 if (rowsAffected > 0) {
                     JOptionPane.showMessageDialog(this, "Employee added to database successfully.");

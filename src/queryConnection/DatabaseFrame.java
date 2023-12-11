@@ -24,9 +24,7 @@ public class DatabaseFrame extends JFrame {
     private JLabel label;
     private JPanel contentPane;
 
-    /**
-     * Launch the application.
-     */
+
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -40,9 +38,7 @@ public class DatabaseFrame extends JFrame {
         });
     }
 
-    /**
-     * Create the frame.
-     */
+   
     public DatabaseFrame() {
     	try {
     		Class.forName("com.mysql.cj.jdbc.Driver");

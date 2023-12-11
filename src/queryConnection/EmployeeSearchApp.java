@@ -47,7 +47,6 @@ class EmployeeSearchFrame extends JFrame {
             return;
         }
 
-        // JDBC database connection parameters
         final String username = "eziegl4";
     	final String password = "COSC*26yaj";
     	final String url = "jdbc:mysql://triton.towson.edu:3360/?serverTimezoneEST#/"+username+"db";
@@ -59,11 +58,9 @@ class EmployeeSearchFrame extends JFrame {
 
                 try (ResultSet resultSet = preparedStatement.executeQuery()) {
                     if (resultSet.next()) {
-                        // Employee found
                         String name = resultSet.getString("Name");
                         resultLabel.setText("Employee Found: " + name);
                     } else {
-                        // Employee not found
                         resultLabel.setText("Employee Not Found");
                     }
                 }

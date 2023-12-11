@@ -120,7 +120,6 @@ public class CreateTransaction extends JFrame {
             setSize(600, 400);
             setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
-            // Assuming you have a method to retrieve data from the database
             food = new DefaultTableModel();
             food.addColumn("Price");
             food.addColumn("Category");
@@ -160,7 +159,6 @@ public class CreateTransaction extends JFrame {
             DefaultTableModel model = (DefaultTableModel) foodTable.getModel();
             model.setRowCount(0);
 
-            // Database connection parameters
             final String username = "eziegl4";
             final String password = "COSC*26yaj";
             final String url = "jdbc:mysql://triton.towson.edu:3360/?serverTimezoneEST#/" + username + "db";
@@ -193,7 +191,6 @@ public class CreateTransaction extends JFrame {
                 for (int i = 0; i < food.getColumnCount(); i++) {
                     rowData.add(food.getValueAt(selectedRow, i));
                 }
-                // Add the selected item to the cart table
                 cartTableModel.addRow(rowData);
             }
             cart.addFood(new item(
@@ -242,7 +239,6 @@ public class CreateTransaction extends JFrame {
             submitButton = new JButton("Submit");
             submitButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    // Implement code to handle submission of the shopping cart
                     submitCart();
                 }
             });
@@ -268,15 +264,6 @@ public class CreateTransaction extends JFrame {
         }
 
         private void submitCart() {
-
-            // Implement code to handle the submission of the shopping cart
-            // For example, you can print the items to the console
-            for (int i = 0; i < cartTableModel.getRowCount(); i++) {
-                // System.out.println("Item ID: " + cartTableModel.getValueAt(i, 0));
-                // System.out.println("Item Name: " + cartTableModel.getValueAt(i, 3));
-                // System.out.println("Price: " + cartTableModel.getValueAt(i, 1));
-            }
-            // Close the application after submission
 
             final String username = "eziegl4";
             final String password = "COSC*26yaj";
