@@ -36,7 +36,7 @@ class ViewTransactions extends JFrame {
     	final String url = "jdbc:mysql://triton.towson.edu:3360/?serverTimezoneEST#/"+username+"db";
 
         try (Connection connection = DriverManager.getConnection(url, username, password)) {
-            String sql = "SELECT * FROM eziegl4db.FoodBill";
+            String sql = "SELECT * FROM eziegl4db.FoodBill;";
             try (Statement statement = connection.createStatement();
                  ResultSet resultSet = statement.executeQuery(sql)) {
                 StringBuilder resultText = new StringBuilder("Table Data:\n\n");
