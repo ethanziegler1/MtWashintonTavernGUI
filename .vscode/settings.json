@@ -1,5 +1,21 @@
 {
     "java.dependency.packagePresentation": "flat",
     "java.project.explorer.showNonJavaResources": true,
-    "java.debug.settings.onBuildFailureProceed": true
+    "java.debug.settings.onBuildFailureProceed": true,
+    "sqltools.connections": [
+        {
+            "mysqlOptions": {
+                "authProtocol": "default",
+                "enableSsl": "Disabled"
+            },
+            "previewLimit": 50,
+            "server": "triton.towson.edu",
+            "port": 3360,
+            "driver": "MariaDB",
+            "name": "cosc",
+            "database": "eziegl4db",
+            "username": "eziegl4",
+            "askForPassword": true
+        }
+    ]
 }

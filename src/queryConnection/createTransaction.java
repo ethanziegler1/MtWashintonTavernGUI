@@ -2,6 +2,7 @@ package queryConnection;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -9,7 +10,8 @@ import java.sql.*;
 import java.util.Vector;
 
 public class CreateTransaction extends JFrame {
-    private JTextField customerIdField, nameField, tableNumField, serverIdField;
+    private JTextField customerIdField, nameField, tableNumField;
+    private JLabel serverIdField = new JLabel();
     private JButton submitButton;
     private shoppingcart cart = new shoppingcart();
 
@@ -35,7 +37,7 @@ public class CreateTransaction extends JFrame {
         panel.add(tableNumField);
 
         panel.add(new JLabel("Server ID:"));
-        serverIdField = new JTextField();
+        serverIdField.setText(Main_Menu.user.getCurrentUser());;
         panel.add(serverIdField);
 
         submitButton = new JButton("Submit");
@@ -65,33 +67,68 @@ public class CreateTransaction extends JFrame {
         SID = serverId;
         CID = customerId;
         // Open the second window
+        createCustomer(customerId, name, tableNum, serverId);
         new FoodMenuWindow();
+        new ShoppingCartWindow();
         this.setVisible(false);
+    }
+
+    private void createCustomer(String cid, String name, String tbnum, String sid){
+         final String username = "eziegl4";
+            final String password = "COSC*26yaj";
+            final String url = "jdbc:mysql://triton.towson.edu:3360/?serverTimezoneEST#/"+username+"db";
+    
+            try (Connection connection = DriverManager.getConnection(url, username, password)) {
+                String query = "INSERT INTO eziegl4.Customer (CustomerID, Name, TableNum, ServerID) VALUES(?,?,?,?);";
+                try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+                    
+                    preparedStatement.setString(1, cid);
+                    preparedStatement.setString(2, name);
+                    preparedStatement.setString(3, tbnum);
+                    preparedStatement.setString(4, sid);
+    
+                           int resultSet = preparedStatement.executeUpdate();
+
+                           if (resultSet > 0) {
+                            JOptionPane.showMessageDialog(this, "Employee added to database successfully.");
+                           
+                        } else {
+                            JOptionPane.showMessageDialog(this, "Failed to add employee to database.");
+                        }
+                    
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+                JOptionPane.showMessageDialog(this, "Error connecting to the database.");
+            }
     }
 
     private class FoodMenuWindow extends JFrame {
         private JTable foodTable;
-        private DefaultTableModel tableModel;
+        private DefaultTableModel food;
         private JButton addToCartButton;
 
         public FoodMenuWindow() {
             setTitle("Food Menu");
             setSize(600, 400);
-            setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
             // Assuming you have a method to retrieve data from the database
-            Vector<Vector<Object>> data = fetchDataFromDatabase();
-            Vector<String> columnNames = new Vector<>();
-            columnNames.add("Item ID");
-            columnNames.add("Item Name");
-            columnNames.add("Price");
+            food = new DefaultTableModel();
+            food.addColumn("Price");
+            food.addColumn("Category");
+            food.addColumn("Description");
+            food.addColumn("Item ID");
 
-            tableModel = new DefaultTableModel(data, columnNames);
-            foodTable = new JTable(tableModel);
+            
+            foodTable = new JTable(food);
+            displayFoodFromDatabase();
             foodTable.addMouseListener(new MouseAdapter() {
                 public void mouseClicked(MouseEvent e) {
                     if (e.getClickCount() == 2) {
-                        addToCart();
+
+                        cart.addFood(new item(SID, Cname, tip, CID));
+                        
                     }
                 }
             });
@@ -99,10 +136,12 @@ public class CreateTransaction extends JFrame {
             addToCartButton = new JButton("Add to Cart");
             addToCartButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    addToCart();
 
+                    addToCart();
+                
                 }
             });
+
 
             JPanel panel = new JPanel(new BorderLayout());
             panel.add(new JScrollPane(foodTable), BorderLayout.CENTER);
@@ -113,8 +152,8 @@ public class CreateTransaction extends JFrame {
         }
 
         private void displayFoodFromDatabase() {
-           // DefaultTableModel model = (DefaultTableModel) foodTable.getModel();
-            foodTable.setRowCount(0);
+            DefaultTableModel model = (DefaultTableModel) foodTable.getModel();
+            model.setRowCount(0);
     
             // Database connection parameters
             final String username = "eziegl4";
@@ -131,7 +170,7 @@ public class CreateTransaction extends JFrame {
                             String description = resultSet.getString("description");
                             String itemId = resultSet.getString("ItemID");
     
-                            foodTable.addRow(new Object[]{price, category, description, itemId});
+                            model.addRow(new Object[]{price, category, description, itemId});
                         }
                     }
                 }
@@ -139,18 +178,28 @@ public class CreateTransaction extends JFrame {
                 ex.printStackTrace();
                 JOptionPane.showMessageDialog(this, "Error connecting to the database.");
             }
+
+
+            
         }
 
         private void addToCart() {
             int selectedRow = foodTable.getSelectedRow();
             if (selectedRow != -1) {
                 Vector<Object> rowData = new Vector<>();
-                for (int i = 0; i < tableModel.getColumnCount(); i++) {
-                    rowData.add(tableModel.getValueAt(selectedRow, i));
+                for (int i = 0; i < food.getColumnCount(); i++) {
+                    rowData.add(food.getValueAt(selectedRow, i));
                 }
                 // Add the selected item to the cart table
                 cartTableModel.addRow(rowData);
             }
+            cart.addFood(new item(
+                (String) food.getValueAt(selectedRow, 0),
+                (String) food.getValueAt(selectedRow, 1),
+                (String) food.getValueAt(selectedRow, 2),
+                (String) food.getValueAt(selectedRow, 3)
+            ));
+            System.out.println(cart);
         }
     }
 
@@ -166,9 +215,10 @@ public class CreateTransaction extends JFrame {
             setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
             Vector<String> columnNames = new Vector<>();
-            columnNames.add("Item ID");
-            columnNames.add("Item Name");
             columnNames.add("Price");
+            columnNames.add("Category");
+            columnNames.add("Item Name");
+            columnNames.add("ItemID");
 
             cartTableModel = new DefaultTableModel(null, columnNames);
             cartTable = new JTable(cartTableModel);
@@ -220,12 +270,14 @@ public class CreateTransaction extends JFrame {
             // Implement code to handle the submission of the shopping cart
             // For example, you can print the items to the console
             for (int i = 0; i < cartTableModel.getRowCount(); i++) {
-                System.out.println("Item ID: " + cartTableModel.getValueAt(i, 0));
-                System.out.println("Item Name: " + cartTableModel.getValueAt(i, 1));
-                System.out.println("Price: " + cartTableModel.getValueAt(i, 2));
+               // System.out.println("Item ID: " + cartTableModel.getValueAt(i, 0));
+               // System.out.println("Item Name: " + cartTableModel.getValueAt(i, 3));
+               // System.out.println("Price: " + cartTableModel.getValueAt(i, 1));
             }
             // Close the application after submission
-            System.exit(0);
+
+            
+            this.dispose();
         }
     }
 

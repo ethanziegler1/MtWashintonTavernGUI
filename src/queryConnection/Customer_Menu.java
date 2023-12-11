@@ -15,8 +15,8 @@ public class Customer_Menu extends JFrame {
 
         // Create buttons
         JButton createTransactionButton = new JButton("Create Transaction");
-        JButton searchTransactionsButton = new JButton("Search Transactions");
-        JButton deleteTransactionButton = new JButton("Delete Transaction");
+        JButton searchTransactionsButton = new JButton("View all Transactions");
+     
         JButton lookupIdButton = new JButton("Lookup ID");
 
         // Create a panel to hold the buttons
@@ -25,7 +25,7 @@ public class Customer_Menu extends JFrame {
         // Add buttons to the panel
         panel.add(createTransactionButton);
         panel.add(searchTransactionsButton);
-        panel.add(deleteTransactionButton);
+      
         panel.add(lookupIdButton);
 
         // Add the panel to the content pane of the frame
@@ -37,6 +37,7 @@ public class Customer_Menu extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 // Handle Create Transaction button click
                 System.out.println("Create Transaction button clicked");
+                new CreateTransaction();
             }
         });
 
@@ -44,17 +45,12 @@ public class Customer_Menu extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Handle Search Transactions button click
-                System.out.println("Search Transactions button clicked");
+                System.out.println("View all transactions clicked");
+                new ViewTransactions("View Transactions");
             }
         });
 
-        deleteTransactionButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Handle Delete Transaction button click
-                System.out.println("Delete Transaction button clicked");
-            }
-        });
+        
 
         lookupIdButton.addActionListener(new ActionListener() {
             @Override

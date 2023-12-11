@@ -117,8 +117,15 @@ public class UpdateEmployee extends JFrame{
                 preparedStatement.setString(3, jobTitle);
                 preparedStatement.setString(4, ID);
 
+                int rowsAffected = preparedStatement.executeUpdate();
+
+                if (rowsAffected > 0) {
+                    JOptionPane.showMessageDialog(UpdateEmployee.this, "Employee Updated!");
+                    //clearFields();
+                } else {
+                    JOptionPane.showMessageDialog(this, "Failed to Update Employee.");
+                }
             
-            JOptionPane.showMessageDialog(UpdateEmployee.this, "Employee Updated!");
             
             }
 

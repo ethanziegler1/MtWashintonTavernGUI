@@ -1,6 +1,9 @@
 package queryConnection;
 
 import javax.swing.*;
+
+import netscape.javascript.JSObject;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,6 +16,7 @@ import java.sql.SQLException;
 public class LoginGUI extends JFrame {
 
     private JTextField idField;
+    private String spid;
 
 
     public LoginGUI() {
@@ -56,6 +60,7 @@ public class LoginGUI extends JFrame {
         add(panel);
 
     }
+    
 
     private boolean validateLogin(String employeeId) {
     
@@ -73,7 +78,8 @@ public class LoginGUI extends JFrame {
                 try (ResultSet resultSet = preparedStatement.executeQuery()) {
                     if (resultSet.next()) {
                         // Employee found
-                        String name = resultSet.getString("Name");
+                        String name = resultSet.getString("EmployeeID");
+                        spid =name;
                         return true;
                     } else {
                         // Employee not found
@@ -105,7 +111,7 @@ public class LoginGUI extends JFrame {
     }
 
     private void windowSwap(){
-        new Main_Menu();
+        new Main_Menu().user.setCurrentUser(spid);;
         this.dispose();
     }
 }

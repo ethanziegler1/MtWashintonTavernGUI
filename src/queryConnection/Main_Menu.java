@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Main_Menu extends JFrame {
+    public static currUser user = new currUser("");
     public Main_Menu() {
         // Set the title of the JFrame
         setTitle("My GUI");

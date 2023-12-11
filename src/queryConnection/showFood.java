@@ -79,6 +79,9 @@ public class showFood extends JFrame {
             ex.printStackTrace();
             JOptionPane.showMessageDialog(this, "Error connecting to the database.");
         }
+
+        
+        
     }
 
     private void printSelectedFoodDetails(int selectedRow) {

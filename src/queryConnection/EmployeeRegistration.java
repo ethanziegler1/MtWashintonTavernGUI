@@ -117,10 +117,10 @@ class EmployeeRegistrationFrame extends JFrame {
                 //this.dispose();
 
                 if (rowsAffected > 0) {
-                    JOptionPane.showMessageDialog(this, "Food added to database successfully.");
+                    JOptionPane.showMessageDialog(this, "Employee added to database successfully.");
                    
                 } else {
-                    JOptionPane.showMessageDialog(this, "Failed to add food to database.");
+                    JOptionPane.showMessageDialog(this, "Failed to add employee to database.");
                 }
                 }
 

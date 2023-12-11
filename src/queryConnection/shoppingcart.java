@@ -12,7 +12,13 @@ public class shoppingcart {
     }
 
     public void removeFromCart(String name){
-        cart.remove(item.getDescription() == "name");
+        
+        for(int i = 0; i< cart.size(); i++){
+            if(cart.get(i).getDescription() == name){
+                cart.remove(i);
+                break;
+            }
+        }
     }
     @Override
     public String toString() {
@@ -21,5 +27,14 @@ public class shoppingcart {
             fin+=t.toString()+"\n";
         }
         return fin;
+    }
+
+    public double getTotal(){
+        double total =0;
+        for(item t : cart){
+            total = total + t.getPriceNum();
+
+        }
+        return total;
     }
 }
