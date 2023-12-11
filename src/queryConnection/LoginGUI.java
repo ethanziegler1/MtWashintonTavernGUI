@@ -23,7 +23,7 @@ public class LoginGUI extends JFrame {
      
         setTitle("Employee Login");
         this.setSize(300, 200);
-        this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
      
         JPanel panel = new JPanel();

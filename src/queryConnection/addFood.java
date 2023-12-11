@@ -16,7 +16,7 @@ public class addFood extends JFrame {
     public addFood() {
         setTitle("Add Food to Database");
         setSize(400, 300);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     JPanel panel = new JPanel();
         panel.setLayout(new GridLayout(5, 2));
 

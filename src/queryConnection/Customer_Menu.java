@@ -11,7 +11,7 @@ public class Customer_Menu extends JFrame {
         setTitle("Customer");
 
         // Set the default close operation
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         // Create buttons
         JButton createTransactionButton = new JButton("Create Transaction");

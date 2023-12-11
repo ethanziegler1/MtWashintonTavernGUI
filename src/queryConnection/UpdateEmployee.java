@@ -25,7 +25,7 @@ public class UpdateEmployee extends JFrame{
 
         // Create and set up the main frame
         setTitle("Employee Management System");
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         // Create components
         empIdTextField = new JTextField(10);

@@ -214,7 +214,7 @@ public class CreateTransaction extends JFrame {
         public ShoppingCartWindow() {
             setTitle("Shopping Cart");
             setSize(400, 300);
-            setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
             Vector<String> columnNames = new Vector<>();
             columnNames.add("Price");
